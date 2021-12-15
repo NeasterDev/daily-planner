@@ -10,11 +10,24 @@ var containerEl = $('.container');
 // Set date element to the current date
 readableDateEl.text(readableDate);
 
-var containerClickHandler = function (event) {
-    var target = $(event.target);
-    if (target.is(".description")) {
-        target.text("Hey");
-    }
-}
+// var containerClickHandler = function (event) {
+//     var target = $(event.target);
+//     if (target.is(".description")) {
+//         target.append("<textarea></textarea>");
+//     }
+// }
 
-$(containerEl).on('click', containerClickHandler);
+// var containerBlue = function(event) {
+//     var target = $(event.target);
+
+// }
+
+// $(containerEl).on('click', containerClickHandler);
+// $(containerEl).on('blur', containerBlur);
+
+$('.description').on("click",  function() {
+    var textInput = $('<textarea>');
+    $(this).append(textInput);
+
+    textInput.trigger("focus");
+})
