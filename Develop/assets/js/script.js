@@ -46,8 +46,8 @@ $('.saveBtn').on('click', function() {
 // function to check if timeblock is in the past present or future
 var pastPresentFuture = function(id) {
     var timeBlock = $('#' + id);
-    
     timeBlock.children('p').text(localStorage.getItem('saveText' + id));
+
     if(id === hour){
         timeBlock.addClass("present");
     } else if(id < hour) {
