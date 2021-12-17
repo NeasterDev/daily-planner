@@ -1,4 +1,4 @@
-# Work Day Scheduler Starter Code
+# Daily Planner
 ***Manage your daily schedule!***
 - *Features*
 - Dynamic colors for past, present, and future events
