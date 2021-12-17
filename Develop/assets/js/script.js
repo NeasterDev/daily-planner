@@ -11,10 +11,19 @@ var containerEl = $('.container');
 // Set date element to the current date
 readableDateEl.text(readableDate);
 
-$('.description').on("click",  function() {
+$('.description').on("click", "p", function() {
     var textInput = $('<textarea>');
+    textInput.addClass("description");
     $(this).replaceWith(textInput);
 
     textInput.trigger("focus");
 });
 
+$('.description').on("blur", "textarea", function() {
+    var text = this.val();
+    var descriptionBox = $("<p>");
+    descriptionBox.text(text);
+    //descriptionBox.addClass("col-10 description past");
+    $(this).replaceWith(descriptionBox);
+
+})
