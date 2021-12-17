@@ -25,5 +25,28 @@ $('.description').on("blur", "textarea", function() {
     descriptionBox.text(text);
     //descriptionBox.addClass("col-10 description past");
     $(this).replaceWith(descriptionBox);
+});
 
-})
+var pastPresentFuture = function(id) {
+    var timeBlock = $('#' + id);
+
+    if(id === hour){
+        timeBlock.addClass("present");
+    } else if(id < hour) {
+        timeBlock.addClass("past")
+    } else {
+        timeBlock.addClass("future");
+    }
+}
+
+var checkTime = setTimeout(function(){
+    for (var i = 9; i < 18; i++) {
+        pastPresentFuture(i);
+    }
+});
+
+var checkTime = setInterval(function(){
+    for (var i = 9; i < 18; i++) {
+        pastPresentFuture(i);
+    }
+}, (60 * 1000) * 30);
