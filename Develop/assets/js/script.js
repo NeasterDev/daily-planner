@@ -7,29 +7,47 @@ console.log(hour);
 // JQuery variables
 var readableDateEl = $('#currentDay');
 var containerEl = $('.container');
+var descriptionEl = $('.description');
 
 // Set date element to the current date
 readableDateEl.text(readableDate);
 
+var localTaskBlocks = [];
+
+// when the description area is clicked then create a textarea box
 $('.description').on("click", "p", function() {
+    var text = $(this).text();
     var textInput = $('<textarea>');
+
+    textInput.val(text);
     textInput.addClass("description");
     $(this).replaceWith(textInput);
 
     textInput.trigger("focus");
 });
 
+// when the description textarea is blurred then change back to a p element with textarea value inside it
 $('.description').on("blur", "textarea", function() {
-    var text = this.val();
+    var text = $(this).val();
     var descriptionBox = $("<p>");
     descriptionBox.text(text);
-    //descriptionBox.addClass("col-10 description past");
     $(this).replaceWith(descriptionBox);
 });
 
+$('.saveBtn').on('click', function() {
+    // traverse my way from the savebtn div to the p inside of description relative to what savebtn i clicked
+    var saveText = $(this).parent('div').children('.description').children('p')[0];
+    var idNum = $(this).parent('div').children('.description').attr('id');
+    console.log(idNum);
+
+    localStorage.setItem('saveText' + idNum, saveText.textContent);
+});
+
+// function to check if timeblock is in the past present or future
 var pastPresentFuture = function(id) {
     var timeBlock = $('#' + id);
-
+    
+    timeBlock.children('p').text(localStorage.getItem('saveText' + id));
     if(id === hour){
         timeBlock.addClass("present");
     } else if(id < hour) {
@@ -39,13 +57,15 @@ var pastPresentFuture = function(id) {
     }
 }
 
-var checkTime = setTimeout(function(){
+// checks time for each time block when page loads
+var checkTimeTimeout = setTimeout(function(){
     for (var i = 9; i < 18; i++) {
         pastPresentFuture(i);
     }
 });
 
-var checkTime = setInterval(function(){
+// checks time for each time block every 30 minutes
+var checkTimeInterval = setInterval(function(){
     for (var i = 9; i < 18; i++) {
         pastPresentFuture(i);
     }
